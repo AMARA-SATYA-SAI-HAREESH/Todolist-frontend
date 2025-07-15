@@ -1,0 +1,16 @@
+.member-card{
+  padding: 20px;
+  background-color: orange;
+  color: white;
+  width: 200px;
+}
+.member-subhedding{
+  color: blue;
+  font-weight: bold;
+}
+.center-screen{
+  margin: 20px 100px 0px 100px;
+}
+.margin-vertical-10{
+  margin: 10px 0px;
+}

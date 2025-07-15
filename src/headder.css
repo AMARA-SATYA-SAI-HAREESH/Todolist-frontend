@@ -1,0 +1,10 @@
+.headder{
+    height: 150px;
+    background-color: rgb(179, 102, 250);
+    color: white;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 3px 5px green;
+}
