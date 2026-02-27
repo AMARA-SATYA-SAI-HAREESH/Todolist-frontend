@@ -35,7 +35,7 @@ function App() {
     if (userPassword) {
       fetchTodos();
     }
-  }, [fetchTodos]);
+  }, [fetchTodos, userPassword]);
 
   // ✅ SUPER SEARCH - Real-time filter
   const filteredTodos = todos.filter((todo) =>
@@ -45,13 +45,10 @@ function App() {
   const addTodo = async () => {
     if (!newTodo.trim()) return;
     try {
-      const response = await axios.post(
-        "https://todolist-backend-lv5j.onrender.com/api/todos",
-        {
-          text: newTodo,
-          userPassword: userPassword,
-        },
-      );
+      await axios.post("https://todolist-backend-lv5j.onrender.com/api/todos", {
+        text: newTodo,
+        userPassword: userPassword,
+      });
       fetchTodos();
       setNewTodo("");
     } catch (error) {
