@@ -35,7 +35,7 @@ function App() {
     if (userPassword) {
       fetchTodos();
     }
-  }, [fetchTodos, userPassword]);
+  }, [fetchTodos]);
 
   // ✅ SUPER SEARCH - Real-time filter
   const filteredTodos = todos.filter((todo) =>
