@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -8,7 +8,7 @@ function App() {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
   const [userPassword, setUserPassword] = useState(
-    localStorage.getItem("userPassword") || ""
+    localStorage.getItem("userPassword") || "",
   );
   const [showPasswordScreen, setShowPasswordScreen] = useState(true);
   const [searchQuery, setSearchQuery] = useState(""); // ✅ SUPER SEARCH
@@ -20,26 +20,26 @@ function App() {
     setShowPasswordScreen(false);
   };
 
-  useEffect(() => {
-    if (userPassword) {
-      fetchTodos();
-    }
-  }, [userPassword]);
-
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://todolist-backend-lv5j.onrender.com/api/todos?password=${userPassword}`
+        `https://todolist-backend-lv5j.onrender.com/api/todos?password=${userPassword}`,
       );
       setTodos(response.data);
     } catch (error) {
       console.log("Backend not running");
     }
-  };
+  }, [userPassword]);
+
+  useEffect(() => {
+    if (userPassword) {
+      fetchTodos();
+    }
+  }, [fetchTodos]);
 
   // ✅ SUPER SEARCH - Real-time filter
   const filteredTodos = todos.filter((todo) =>
-    todo.text.toLowerCase().includes(searchQuery.toLowerCase())
+    todo.text.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const addTodo = async () => {
@@ -50,7 +50,7 @@ function App() {
         {
           text: newTodo,
           userPassword: userPassword,
-        }
+        },
       );
       fetchTodos();
       setNewTodo("");
@@ -71,7 +71,7 @@ function App() {
         {
           text: editText,
           userPassword: userPassword,
-        }
+        },
       );
       fetchTodos();
       setEditingId(null);
@@ -89,7 +89,7 @@ function App() {
   const deleteTodo = async (id) => {
     try {
       await axios.delete(
-        `https://todolist-backend-lv5j.onrender.com/api/${id}`
+        `https://todolist-backend-lv5j.onrender.com/api/${id}`,
       );
       fetchTodos();
     } catch (error) {
@@ -156,7 +156,7 @@ function App() {
       <ul className="todo-list">
         {filteredTodos.map(
           (
-            todo // ✅ SEARCHED LIST
+            todo, // ✅ SEARCHED LIST
           ) => (
             <li key={todo._id} className="todo-item">
               {editingId === todo._id ? (
@@ -191,7 +191,7 @@ function App() {
                 </>
               )}
             </li>
-          )
+          ),
         )}
       </ul>
 
