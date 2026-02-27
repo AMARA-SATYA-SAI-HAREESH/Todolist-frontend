@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TodoMobile</string>
+    <string name="title_activity_main">TodoMobile</string>
+    <string name="package_name">com.hareesh.todolist</string>
+    <string name="custom_url_scheme">com.hareesh.todolist</string>
+</resources>
